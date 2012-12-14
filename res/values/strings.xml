@@ -1,0 +1,36 @@
+<resources>
+
+    <string name="app_name">meteo</string>
+ 
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_main">Station meteo (MENU)</string>
+
+
+
+    <string name="checkBox">Automatique</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="shutter">Volet</string>
+    <string name="regles">Réglages</string>
+    <string name="ref">Relance</string>
+    
+    <!-- TEXTE DEBUT -->
+    <string name="des">Appli de ouf</string>
+    
+    <!-- LUMINOSITE -->
+    <string name="affint">LumInt</string>
+    <string name="affext">LumExt</string>
+    
+    <!-- TEMPERATURE -->
+    <string name="Tint">TempInt</string>
+	<string name="Text">TempExt</string>
+	
+	<!-- METEO -->
+	<string name="affweather">Weather</string>
+	
+	<!-- LUMIERE -->
+	<string name="afflamp">Lamp</string>
+	
+	<!-- VOLET -->
+	<string name="posVolet">Volet</string>
+    
+</resources>

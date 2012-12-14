@@ -1,0 +1,149 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" 
+    android:orientation="vertical" >
+
+    <Button
+        android:id="@+id/Refresh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:onClick="Menu"
+        android:text="@string/ref" />
+    
+   <TextView
+        android:id="@+id/test"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:textSize="15sp"
+  		android:textColor="#EE1010"
+  		android:gravity="center"
+  		android:textStyle="bold"
+        android:text="@string/des"
+        android:layout_below="@id/Refresh" />
+    
+    <Button
+        android:id="@+id/ButtonLight"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="15dp"
+        android:onClick="pageSettings"
+        android:text="@string/regles"
+        android:layout_below="@id/test" />
+    
+    <!-- LUMIERE -->
+    <TextView
+        android:id="@+id/lamp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:layout_below="@id/ButtonLight"
+        android:text="@string/afflamp" />
+    
+    <SeekBar
+        android:id="@+id/seekBar_light"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:progress="50"
+        android:layout_below="@id/lamp" />
+    
+    <!-- VOLET -->
+    <TextView
+        android:id="@+id/volet"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:layout_below="@id/seekBar_light"
+        android:text="@string/posVolet" />
+    
+    <SeekBar 
+        android:id="@+id/seekBar_stores"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/volet"
+        android:progress="50" />
+
+    <!-- LUMINOSITE -->
+    <TextView
+        android:id="@+id/LightInt"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:layout_below="@id/seekBar_stores"
+        android:text="@string/affint" />
+    
+    <TextView
+        android:id="@+id/LightExt"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:layout_below="@id/seekBar_stores"
+        android:text="@string/affext" />
+
+    <!-- TEMPERATURE -->
+    <TextView
+        android:id="@+id/tempint"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:layout_below="@id/LightInt"
+        android:text="@string/Tint" />
+    
+    <TextView
+        android:id="@+id/tempext"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:layout_below="@id/LightExt"
+        android:text="@string/Text" />
+    
+    <!-- METEO -->
+    <TextView
+        android:id="@+id/weather"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:layout_below="@id/tempint"
+        android:text="@string/affweather" />
+    
+    
+    
+    <Button
+        android:id="@+id/but"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="15dp"
+        android:onClick="OK"
+        android:text="Valid"
+        android:layout_below="@id/weather" />
+    
+    <RadioGroup
+        android:id="@+id/group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true" >
+        
+        <RadioButton
+            android:id="@+id/radio2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:onClick="pageSettings"
+            android:text="Mode manuel" />
+        
+        <RadioButton
+            android:id="@+id/radio1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_toLeftOf="@+id/radio2"
+            android:text="Mode automatique" />
+        
+    </RadioGroup>
+    
+</RelativeLayout>

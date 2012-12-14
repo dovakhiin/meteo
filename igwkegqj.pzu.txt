@@ -1,0 +1,73 @@
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+#
+# Initial commit
+#
+# Changes to be committed:
+#   (use "git rm --cached <file>..." to unstage)
+#
+#	new file:   .classpath
+#	new file:   .project
+#	new file:   AndroidManifest.xml
+#	new file:   bin/AndroidManifest.xml
+#	new file:   bin/classes.dex
+#	new file:   bin/classes/com/example/meteo/BuildConfig.class
+#	new file:   bin/classes/com/example/meteo/MainActivity$1.class
+#	new file:   bin/classes/com/example/meteo/MainActivity$2.class
+#	new file:   bin/classes/com/example/meteo/MainActivity$3.class
+#	new file:   bin/classes/com/example/meteo/MainActivity$4.class
+#	new file:   bin/classes/com/example/meteo/MainActivity$5.class
+#	new file:   bin/classes/com/example/meteo/MainActivity$6.class
+#	new file:   bin/classes/com/example/meteo/MainActivity.class
+#	new file:   bin/classes/com/example/meteo/R$attr.class
+#	new file:   bin/classes/com/example/meteo/R$drawable.class
+#	new file:   bin/classes/com/example/meteo/R$id.class
+#	new file:   bin/classes/com/example/meteo/R$layout.class
+#	new file:   bin/classes/com/example/meteo/R$menu.class
+#	new file:   bin/classes/com/example/meteo/R$string.class
+#	new file:   bin/classes/com/example/meteo/R$style.class
+#	new file:   bin/classes/com/example/meteo/R.class
+#	new file:   bin/classes/com/example/meteo/RESTLETinterface.class
+#	new file:   bin/classes/com/example/meteo/Settings.class
+#	new file:   bin/jarlist.cache
+#	new file:   bin/meteo.apk
+#	new file:   bin/res/drawable-hdpi/ic_action_search.png
+#	new file:   bin/res/drawable-hdpi/ic_launcher.png
+#	new file:   bin/res/drawable-ldpi/ic_launcher.png
+#	new file:   bin/res/drawable-mdpi/ic_action_search.png
+#	new file:   bin/res/drawable-mdpi/ic_launcher.png
+#	new file:   bin/res/drawable-xhdpi/ic_action_search.png
+#	new file:   bin/res/drawable-xhdpi/ic_launcher.png
+#	new file:   bin/resources.ap_
+#	new file:   gen/com/example/meteo/BuildConfig.java
+#	new file:   gen/com/example/meteo/R.java
+#	new file:   ic_launcher-web.png
+#	new file:   libs/android-support-v4.jar
+#	new file:   libs/org.restlet.jar
+#	new file:   meteo_projet/.gitattributes
+#	new file:   meteo_projet/.gitignore
+#	new file:   proguard-project.txt
+#	new file:   project.properties
+#	new file:   res/drawable-hdpi/ic_action_search.png
+#	new file:   res/drawable-hdpi/ic_launcher.png
+#	new file:   res/drawable-ldpi/ic_launcher.png
+#	new file:   res/drawable-mdpi/ic_action_search.png
+#	new file:   res/drawable-mdpi/ic_launcher.png
+#	new file:   res/drawable-xhdpi/ic_action_search.png
+#	new file:   res/drawable-xhdpi/ic_launcher.png
+#	new file:   res/layout/activity_main.xml
+#	new file:   res/layout/activity_settings.xml
+#	new file:   res/menu/activity_main.xml
+#	new file:   res/menu/activity_notification.xml
+#	new file:   res/menu/activity_settings.xml
+#	new file:   res/values-v11/styles.xml
+#	new file:   res/values-v14/styles.xml
+#	new file:   res/values/strings.xml
+#	new file:   res/values/styles.xml
+#	new file:   src/com/example/meteo/MainActivity.java
+#	new file:   src/com/example/meteo/RESTLETinterface.java
+#	new file:   src/com/example/meteo/Settings.java
+#
+
