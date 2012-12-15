@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -24,12 +25,13 @@ public class MainActivity extends Activity {
 	static Integer light, volet;
 	static SeekBar seek_light, seek_shutter;
 	static Boolean meteo;
+	static int newProgressValue, currentProgress;
+	static SharedPreferences sharedPreferences;
+	static String Key_PROGRESS = "key_progress";
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        String b = RESTLETinterface.getLumInt();
-        System.out.print("------RESTLET-----"+b);
         
         //affichage texte
         TextView test = (TextView)findViewById(R.id.test);
@@ -60,6 +62,41 @@ public class MainActivity extends Activity {
 	        //affichage sur la seekbar
 	        seek_light = (SeekBar)findViewById(R.id.seekBar_light);
 	        fonction_light();   
+	        	        
+	        seek_light.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
+
+	    		public void onStopTrackingTouch(SeekBar seekBar) {
+
+	    			newProgressValue = seekBar.getProgress();
+	    			currentProgress = newProgressValue;
+	    			SharedPreferences.Editor editor = sharedPreferences.edit();
+	    			editor.putInt(Key_PROGRESS, newProgressValue);
+	    			editor.commit();
+
+	    		}
+
+	    		public void onStartTrackingTouch(SeekBar seekBar) {
+	    			// TODO Auto-generated method stub
+
+	    		}
+
+	    		public void onProgressChanged(SeekBar seekBar, int progress,
+	    				boolean fromUser) {
+	    			try {
+						RESTLETinterface.setValue("light", "setLevel",seekBar.getProgress());
+					} catch (ResourceException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
+	    		}
+	    	});  
+	        
+	        
+	        
 	        
 	    /*VOLET*/    
 	        //affichage position volet
