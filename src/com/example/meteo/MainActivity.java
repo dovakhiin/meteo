@@ -1,6 +1,7 @@
 package com.example.meteo;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
@@ -25,12 +26,14 @@ public class MainActivity extends Activity {
 	static Integer light, volet;
 	static SeekBar seek_light, seek_shutter;
 	static Boolean meteo;
-	static int newProgressValue, currentProgress;
+	static int newProgressValue = 10, currentProgress;
 	static SharedPreferences sharedPreferences;
-	static String Key_PROGRESS = "key_progress";
+	static String Key_PROGRESS = "key_progress", PREFERENCE_PROGRESS = "preference_progress";
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        sharedPreferences = getSharedPreferences(PREFERENCE_PROGRESS,Context.MODE_PRIVATE);
+        currentProgress = sharedPreferences.getInt(Key_PROGRESS, 10);
         setContentView(R.layout.activity_main);
         
         //affichage texte
@@ -61,29 +64,32 @@ public class MainActivity extends Activity {
 	        Afflight = (TextView)findViewById(R.id.lamp);
 	        //affichage sur la seekbar
 	        seek_light = (SeekBar)findViewById(R.id.seekBar_light);
-	        fonction_light();   
-	        	        
-	        seek_light.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
-
-	    		public void onStopTrackingTouch(SeekBar seekBar) {
-
-	    			newProgressValue = seekBar.getProgress();
-	    			currentProgress = newProgressValue;
-	    			SharedPreferences.Editor editor = sharedPreferences.edit();
-	    			editor.putInt(Key_PROGRESS, newProgressValue);
-	    			editor.commit();
-
-	    		}
-
-	    		public void onStartTrackingTouch(SeekBar seekBar) {
-	    			// TODO Auto-generated method stub
-
-	    		}
-
-	    		public void onProgressChanged(SeekBar seekBar, int progress,
-	    				boolean fromUser) {
-	    			try {
-						RESTLETinterface.setValue("light", "setLevel",seekBar.getProgress());
+	        seek_light.setMax(100);
+			seek_light.setProgress(currentProgress);
+			Afflight.setText("Lampe : " + String.valueOf(currentProgress) + " %");
+			seek_light.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
+	
+				public void onStopTrackingTouch(SeekBar seekBar) {
+	
+					newProgressValue = seekBar.getProgress();
+					currentProgress = newProgressValue;
+					SharedPreferences.Editor editor = sharedPreferences.edit();
+					editor.putInt(Key_PROGRESS, newProgressValue);
+					editor.commit();
+	
+				}
+	
+				public void onStartTrackingTouch(SeekBar seekBar) {
+					// TODO Auto-generated method stub
+	
+				}
+	
+				public void onProgressChanged(SeekBar seekBar, int progress,
+						boolean fromUser) {
+					Afflight.setText(String.valueOf(seekBar.getProgress()));
+					try {
+						RESTLETinterface.setValue("light", "setLevel",
+								seekBar.getProgress());
 					} catch (ResourceException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -91,13 +97,11 @@ public class MainActivity extends Activity {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-
-	    		}
-	    	});  
-	        
-	        
-	        
-	        
+	
+				}
+			});
+  
+	        	        	                	        
 	    /*VOLET*/    
 	        //affichage position volet
 	        shutter = (TextView)findViewById(R.id.volet);   
@@ -159,7 +163,7 @@ public class MainActivity extends Activity {
     
     
     /*FONCTION GERANT LA LUMIERE*/
-    public void fonction_light(){
+   /* public void fonction_light(){
     	new Thread(new Runnable() {
 	    	public void run() {	
 	    		while (true){
@@ -168,7 +172,7 @@ public class MainActivity extends Activity {
 	    		}	
 	    	 }
     	}).start();
-    }
+    }*/
     
     
     
@@ -214,10 +218,10 @@ public class MainActivity extends Activity {
 		        valtemp.setText(affichage);
 	        }
 	        //lumière
-	        else if(msg.what == 5){
+	       /* else if(msg.what == 5){
 	        	Afflight.setText(" Lampe : "+light+" % ");
 	        	seek_light.setProgress(light);
-	        } 
+	        } */
 	        //volet
 	        else if(msg.what == 6){
     	        shutter.setText(" Volet : "+volet+" % ");    
@@ -228,7 +232,6 @@ public class MainActivity extends Activity {
     
     
 
-    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_main, menu);
         return true;
@@ -245,7 +248,6 @@ public class MainActivity extends Activity {
 	}
     
     public void OK (View view) throws ResourceException, IOException {
-    	//RESTLETinterface.setValue("light", "setLevel()", RESTLETinterface.getLamp()-3);
     	RESTLETinterface.setValue("shutter", "pullUp()", RESTLETinterface.getVolet());
     	Intent intent = new Intent(this, MainActivity.class);
 		startActivity(intent);
