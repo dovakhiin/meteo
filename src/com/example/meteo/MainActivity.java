@@ -1,7 +1,9 @@
 package com.example.meteo;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,6 +19,10 @@ import java.io.IOException;
 
 import org.restlet.resource.ResourceException;
 
+
+import com.example.meteo.RESTLETinterface;
+import com.example.meteo.R;
+
 public class MainActivity extends Activity {
 	
 	static String lumint, lumext, tempint, tempext;
@@ -24,9 +30,18 @@ public class MainActivity extends Activity {
 	static Integer light, volet;
 	static SeekBar seek_light, seek_shutter;
 	static Boolean meteo;
+	private int currentProgress, newProgressValue = 10;
+	private SharedPreferences sharedPreferences;
+	private String Key_PROGRESS = "key_progress";
+	private String PREFERENCE_PROGRESS = "preference_progress";
+    Button but = (Button) findViewById(R.id.but);
+
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        sharedPreferences = getSharedPreferences(PREFERENCE_PROGRESS,
+				Context.MODE_PRIVATE);
+		currentProgress = sharedPreferences.getInt(Key_PROGRESS, 10);
         setContentView(R.layout.activity_main);
         String b = RESTLETinterface.getLumInt();
         System.out.print("------RESTLET-----"+b);
@@ -59,7 +74,48 @@ public class MainActivity extends Activity {
 	        Afflight = (TextView)findViewById(R.id.lamp);
 	        //affichage sur la seekbar
 	        seek_light = (SeekBar)findViewById(R.id.seekBar_light);
-	        fonction_light();   
+	       // fonction_light(); 
+	        
+	        //********************************************//
+	        //remplacé par ce qui suit
+	        seek_light.setMax(100);
+			seek_light.setProgress(currentProgress);
+			Afflight.setText("Lampe : "+String.valueOf(currentProgress)+" %"); 
+			seek_light.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
+
+				public void onStopTrackingTouch(SeekBar seekBar) {
+
+					newProgressValue = seekBar.getProgress();
+					currentProgress = newProgressValue;
+					SharedPreferences.Editor editor = sharedPreferences.edit();
+					editor.putInt(Key_PROGRESS, newProgressValue);
+					editor.commit();
+
+				}
+
+				public void onStartTrackingTouch(SeekBar seekBar) {
+					// TODO Auto-generated method stub
+
+				}
+
+				public void onProgressChanged(SeekBar seekBar, int progress,
+						boolean fromUser) {
+					Afflight.setText(String.valueOf(seekBar
+							.getProgress()));
+					try {
+						RESTLETinterface.setValue("light", "setLevel",
+								seekBar.getProgress());
+					} catch (ResourceException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
+				}
+			});
+			
 	        
 	    /*VOLET*/    
 	        //affichage position volet
@@ -67,9 +123,32 @@ public class MainActivity extends Activity {
 	        //affichage sur la seekbar
 	        seek_shutter = (SeekBar)findViewById(R.id.seekBar_stores);
 	        fonction_volet();
+	        
+	  
+	        //Mode auto/manuel
+
+	        TextView Buttonaffiche = (TextView) findViewById(R.id.Buttonuse);
+			RadioGroup radioGroup = (RadioGroup) findViewById(R.id.group);
+			// On récupère l'identifiant du bouton qui est coché
+			int id = radioGroup.getCheckedRadioButtonId();
+			Buttonaffiche.setText("Bouton utilisé :" + id);
+	    	radioGroup
+			.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+				Button but = (Button) findViewById(R.id.but);
+				public void onCheckedChanged(RadioGroup group, int id) {
+					 /*En fonction de l'identifiant du RadioButton
+					 sélectionné…*/
+					if (id != 2131165194)
+						but.setEnabled(false);
+					else but.setEnabled(true);
+				}
+			});
+	        
+	        
+	        
     }
     
-    
+ 
     
     /*FONCTION GERANT LA LUMINOSITE*/
     public void fonction_lumiere(){
@@ -151,7 +230,6 @@ public class MainActivity extends Activity {
     
     /*FONCTION GERANT LE TEMPS REEL POUR ACTUALISER NOS VALEURS*/
     Handler handler = new Handler(){
-        @Override
         public void handleMessage(Message msg) {
         	//luminosité intérieure
 	        if(msg.what == 0){
@@ -191,16 +269,11 @@ public class MainActivity extends Activity {
     
     
 
-    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_main, menu);
         return true;
     }
-    
-    public void pageSettings(View view){
-    	Intent intent=new Intent(this, Settings.class);
-    	startActivity(intent);
-    }
+ 
     
     public void Menu (View view) {
 		Intent intent = new Intent(this, MainActivity.class);

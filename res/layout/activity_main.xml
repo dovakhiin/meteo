@@ -119,23 +119,24 @@
         android:onClick="OK"
         android:text="Valid"
         android:layout_below="@id/weather" />
-    
+
     <RadioGroup
         android:id="@+id/group"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_alignParentBottom="true" >
-        
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:checkedButton="@+id/radio2"
+        android:orientation="horizontal" >
+
         <RadioButton
             android:id="@+id/radio2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
-            android:onClick="pageSettings"
             android:text="Mode manuel" />
-        
+
         <RadioButton
             android:id="@+id/radio1"
             android:layout_width="wrap_content"
@@ -143,7 +144,14 @@
             android:layout_alignParentBottom="true"
             android:layout_toLeftOf="@+id/radio2"
             android:text="Mode automatique" />
-        
     </RadioGroup>
+
+    <TextView
+        android:id="@+id/Buttonuse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/but"
+        android:layout_centerHorizontal="true"
+        android:text="TextView" />
     
 </RelativeLayout>

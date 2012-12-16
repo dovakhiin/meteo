@@ -16,14 +16,15 @@ public final class R {
     }
     public static final class id {
         public static final int ButtonLight=0x7f070002;
+        public static final int Buttonuse=0x7f070010;
         public static final int LightExt=0x7f070008;
         public static final int LightInt=0x7f070007;
-        public static final int Menu=0x7f070010;
+        public static final int Menu=0x7f070011;
         public static final int Refresh=0x7f070000;
         public static final int but=0x7f07000c;
         public static final int group=0x7f07000d;
         public static final int lamp=0x7f070003;
-        public static final int menu_settings=0x7f070011;
+        public static final int menu_settings=0x7f070012;
         public static final int radio1=0x7f07000f;
         public static final int radio2=0x7f07000e;
         public static final int seekBar_light=0x7f070004;
